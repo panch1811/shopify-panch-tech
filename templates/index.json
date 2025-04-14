@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "digital_suits_slider_CXRjrD": {
@@ -6,17 +15,17 @@
         "slide_q3pDdj": {
           "type": "slide",
           "settings": {
-            "slide_image": "shopify:\/\/shop_images\/75b63ca1303a8da91c66f596d040afd2.jpg",
+            "slide_image": "shopify://shop_images/75b63ca1303a8da91c66f596d040afd2.jpg",
             "slide_title": "Slide 1 Title",
-            "slide_description": "Slide 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
-            "description_pos_x": 35,
-            "description_pos_y": 56
+            "slide_description": "Slide 1ів Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
+            "description_pos_x": 31,
+            "description_pos_y": 69
           }
         },
         "slide_TkEAeN": {
           "type": "slide",
           "settings": {
-            "slide_image": "shopify:\/\/shop_images\/Frame7.jpg",
+            "slide_image": "shopify://shop_images/Frame7.jpg",
             "slide_title": "Slide 2 Title",
             "slide_description": "Slide 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
             "description_pos_x": 50,
@@ -26,7 +35,7 @@
         "slide_prJzWz": {
           "type": "slide",
           "settings": {
-            "slide_image": "shopify:\/\/shop_images\/Frame7-1.jpg",
+            "slide_image": "shopify://shop_images/Frame7-1.jpg",
             "slide_title": "Slide 3 Title",
             "slide_description": "Slide 3 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
             "description_pos_x": 2,
@@ -40,9 +49,9 @@
         "slide_prJzWz"
       ],
       "settings": {
-        "title": "no bullshit inside",
-        "background_color": "#2a2929",
-        "hover_color": "#ffffff"
+        "title": "no bullshit insideвіаіва",
+        "background_color": "#983030",
+        "hover_color": "#1de865"
       }
     }
   },

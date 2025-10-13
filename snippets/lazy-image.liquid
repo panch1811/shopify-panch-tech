@@ -1,0 +1,89 @@
+{%- liquid
+    assign img_width = width | default: image.width
+    assign img_height = height | default: image.height
+    assign alt_text = alt | default: image.alt
+    assign lazy = lazy | default: false
+    assign swiper = swiper | default: false
+    assign loading = 'lazy'
+    case template.name
+        when "product"
+            assign placeholder = 'product-1'
+            if alt_text == blank
+                assign alt_text = product.title
+            endif
+        when "collection"
+            assign placeholder = 'collection-1'
+            if alt_text == blank
+                assign alt_text = collection.title
+            endif
+        else
+            assign placeholder = 'image'
+            if alt_text == blank
+                assign alt_text = shop.name | append: ' Image'
+            endif
+    endcase
+-%}
+
+{%- if lazy == true -%}
+    {%- if section.index > 2 -%}
+        {%- assign loading = "lazy" -%}
+    {%- else -%}
+        {%- assign loading = "eager" -%}
+    {%- endif -%}
+{%- endif -%}
+
+{%- if image.width -%}
+    <img
+        srcset="{%- if img_width >= 50 -%}{{ image | image_url: width: 165 }} 165w,{%- endif -%}
+            {%- if img_width >= 360 -%}{{ image | image_url: width: 360 }} 360w,{%- endif -%}
+            {%- if img_width >= 533 -%}{{ image | image_url: width: 533 }} 533w,{%- endif -%}
+            {%- if img_width >= 720 -%}{{ image | image_url: width: 720 }} 720w,{%- endif -%}
+            {%- if img_width >= 940 -%}{{ image | image_url: width: 940 }} 940w,{%- endif -%}
+            {%- if img_width >= 1066 -%}{{ image | image_url: width: 1066 }} 1066w,{%- endif -%}
+        {{ image | image_url }} {{ img_width }}w"
+        {% if sizes %}
+            sizes="{{ sizes }}"
+        {% endif %}
+        {% if lazy %}
+            loading={{ loading }}
+            data-src="{{ image | image_url: 'master' }}"
+            {% else %}
+            src="{{ image | image_url: "master" }}"
+        {% endif %}
+        alt="{{ alt_text | escape }}"
+        width="{{ width | default: image.width  }}"
+        height="{{ height | default: image.height }}"
+        class="{{ class }} {% if swiper %}swiper-lazy{% endif %}"
+    >
+{%- elsif image != blank -%}
+    <img
+        {% if sizes %}
+            sizes="{{sizes}}"
+        {% endif %}
+        {% if img_width %}
+            srcset="{%- if img_width >= 50 -%}{{ image }} 165w,{%- endif -%}
+                {%- if img_width >= 360 -%}{{ image }} 360w,{%- endif -%}
+                {%- if img_width >= 533 -%}{{ image }} 533w,{%- endif -%}
+                {%- if img_width >= 720 -%}{{ image }} 720w,{%- endif -%}
+                {%- if img_width >= 940 -%}{{ image }} 940w,{%- endif -%}
+                {%- if img_width >= 1066 -%}{{ image }} 1066w,{%- endif -%}
+                {{ image }} {{ img_width }}w"
+            data-src="{{ image }}"
+        {% else %}
+            src="{{ image }}"
+        {% endif %}
+        alt="{{ alt_text | escape }}"
+        {% if lazy %}
+            loading={{ loading }}
+        {% endif %}
+        {% if img_width %}
+            width="{{ img_width }}"
+        {% endif %}
+        {% if img_height %}
+            height="{{ img_height }}"
+        {% endif %}
+        class="{{ class }} {% if swiper %}swiper-lazy{% endif %}"
+    >
+{%- else -%}
+    {{ placeholder | placeholder_svg_tag }}
+{%- endif -%}

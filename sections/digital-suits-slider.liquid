@@ -1,0 +1,123 @@
+{{ 'component-digital-suits-slider.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'digital-suits-slider.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  #shopify-section-{{ section.id }} .slide__content {
+    background-color: {{ section.settings.background_color }};
+  }
+  #shopify-section-{{ section.id }} .slide__title:hover {
+    color: {{ section.settings.hover_color }};
+    opacity: 1;
+  }
+</style>
+
+{% if section.settings.title %}
+  <h2 class="digital-suits-slider__title">{{ section.settings.title }}</h2>
+{% endif %}
+
+<div class="swiper digital-suits-slider page-width">
+  <div class="swiper-wrapper">
+    {% for block in section.blocks %}
+      <div class="swiper-slide slide" data-slide-index="{{ forloop.index0 }}">
+        <div class="slide__image-wrapper">
+          <div class="slide__image">
+            {% render 'lazy-image', image: block.settings.slide_image, lazy: true %}
+            {% if block.settings.slide_description %}
+              <p class="slide__description" style="top: {{ block.settings.description_pos_y }}%; left: {{ block.settings.description_pos_x }}%;">
+                {{ block.settings.slide_description }}
+              </p>
+            {% endif %}
+          </div>
+          <div class="slide__button slide__button--next swiper-button-next">
+            {% render 'icon-slider-arrow' %}
+          </div>
+          <div class="slide__button slide__button--prev swiper-button-prev">
+            {% render 'icon-slider-arrow' %}
+          </div>
+        </div>
+
+        <div class="slide__content">
+          {% for block in section.blocks %}
+            {% if block.settings.slide_title %}
+              <h3 class="slide__title" data-title-index="{{ forloop.index0 }}">{{ block.settings.slide_title }}</h3>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Digital Suits Slider",
+    "class": "section-digital-suits-slider",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Text background color",
+        "default": "#0E0C0C"
+      },
+      {
+        "type": "color",
+        "id": "hover_color",
+        "label": "Text hover color",
+        "default": "#FFFFFF"
+      },
+    ],
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "slide_image",
+            "label": "Slide Image"
+          },
+          {
+            "type": "text",
+            "id": "slide_title",
+            "label": "Slide Title"
+          },
+          {
+            "type": "text",
+            "id": "slide_description",
+            "label": "Slide Description"
+          },
+          {
+            "type": "range",
+            "id": "description_pos_x",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Description Position X",
+            "default": 0
+          },
+          {
+            "type": "range",
+            "id": "description_pos_y",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Description Position Y",
+            "default": 0
+          },
+        ]
+      },
+    ],
+    "presets": [
+      {
+        "name": "Digital Suits Slider"
+      }
+    ]
+  }
+{% endschema %}
